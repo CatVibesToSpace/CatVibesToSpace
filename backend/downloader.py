@@ -17,18 +17,18 @@ def my_hook(d):
 
 def download_video(url):
 
-    ydl_opts = {
-    'format': '[filesize<40M]', # File size seems to need to be tweaked - look into it more
-    'logger': MyLogger(),
-    'progress_hooks': [my_hook],
-}
+        ydl_opts = {
+        'format': '[filesize<40M]', # File size seems to need to be tweaked - look into it more
+        'logger': MyLogger(),
+        'progress_hooks': [my_hook],
+    }
 
 
-url = input("Please enter a youtube URL: ")
-#url = "https://www.youtube.com/watch?v=gTWz-zy3re4"
+    url = input("Please enter a youtube URL: ")
+    #url = "https://www.youtube.com/watch?v=gTWz-zy3re4"
 
-#try:
-with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-    ydl.download([url])
-#except:
-    #print("error: try a shorter video")
+    #try:
+    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        ydl.download([url])
+    #except:
+        #print("error: try a shorter video")
