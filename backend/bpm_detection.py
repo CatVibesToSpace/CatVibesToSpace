@@ -7,7 +7,6 @@ def get_file_bpm(path, params=None):
         path: path to the file
         param: dictionary of parameters
     """
-    print("trying to get file bpm")
     if params is None:
         params = {}
     # default:
@@ -30,11 +29,8 @@ def get_file_bpm(path, params=None):
         win_s = params.win_s
     if 'hop_s' in params:
         hop_s = params.hop_s
-    print("making source")
     s = source(path, samplerate, hop_s)
-    print("made source")
     samplerate = s.samplerate
-    print("sample rate =", samplerate)
     o = tempo("specdiff", win_s, hop_s, samplerate)
     # List of beats, in samples
     beats = []
@@ -57,13 +53,10 @@ def get_file_bpm(path, params=None):
         # if enough beats are found, convert to periods then to bpm
         if len(beats) > 1:
             if len(beats) < 4:
-                print("few beats found in {:s}".format(path))
             bpms = 60./diff(beats)
             return median(bpms)
         else:
-            print("not enough beats found in {:s}".format(path))
             return 0
-    print("bpm before return:", beats_to_bpm(beats,path))
     return beats_to_bpm(beats, path)
 
 def generate_wav_bpm(filename):
