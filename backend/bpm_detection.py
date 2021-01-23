@@ -1,7 +1,6 @@
 from aubio import source, tempo
 from numpy import median, diff
-import subprocess
-import ffmpeg
+from pydub import AudioSegment
 
 def get_file_bpm(path, params=None):
     """ Calculate the beats per minute (bpm) of a given file.
@@ -69,8 +68,6 @@ def get_file_bpm(path, params=None):
 
 def generate_wav_bpm(filename):
     print("GWB has been called with ", filename)
-    command = "ffmpeg -i {} -ab 160k -ac 2 -ar 44100 -vn C:/Users/clips/Documents/GitHub/CatVibesToSpace/backend/audio.wav".format(filename)
-    subprocess.call(command, shell = True)
-    print("audio file has been generated")
+    AudioSegment.from_file(filename).export("audio.wav", format="wav")
     bpm = get_file_bpm('audio.wav')
     return bpm
