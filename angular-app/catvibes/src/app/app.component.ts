@@ -29,6 +29,9 @@ export class AppComponent {
   bpm_wheel = 1;
   render_wheel = 1;
 
+  download_ready = false;
+  download_url = "hailthealmightyoctopus.xyz";
+
   jobWatcher: Observable<any>;
   constructor(private jobService: JobService, private formBuilder: FormBuilder) { 
     this.messageForm = this.formBuilder.group({
@@ -90,7 +93,7 @@ export class AppComponent {
         this.job.encoding_started = data.encoding_started;
 
         this.job.youtube_url = this.messageForm.controls.url.value;
-        this.job.url = "";
+        this.job.url = data.url;
 
         this.progress_percent = 0
         this.buffer_percent = 0
@@ -124,6 +127,11 @@ export class AppComponent {
         {
           this.progress_percent += 100/3
           this.render_wheel = 100;
+        }
+
+        if (this.progress_percent == 100) {
+          this.download_ready = true;
+          this.download_url = this.job.url
         }
     })
     console.log(this.messageForm.controls.url.value);

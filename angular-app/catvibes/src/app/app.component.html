@@ -19,10 +19,13 @@
         </form>
     </mat-card-content>
   </mat-card>
-  <mat-card class="example-card" *ngIf="success">
+  <mat-card class="example-card" *ngIf="success"> 
     <mat-card-content>
-      <h2 class="example-h2">Result</h2>
-
+      <span>
+        <h2 class="example-h2">Result</h2>
+        <a mat-raised-button color="primary" class="download-button" [href]="download_url" *ngIf="download_ready">Download!</a>
+      </span>
+      <p></p>
       <section class="example-section">
         <mat-progress-bar mode='buffer' [value]="progress_percent" [bufferValue]="buffer_percent"></mat-progress-bar>
       </section>
