@@ -25,6 +25,10 @@ export class AppComponent {
   progress_percent = 0;
   buffer_percent = 0;
 
+  download_wheel = 1;
+  bpm_wheel = 1;
+  render_wheel = 1;
+
   jobWatcher: Observable<any>;
   constructor(private jobService: JobService, private formBuilder: FormBuilder) { 
     this.messageForm = this.formBuilder.group({
@@ -94,26 +98,32 @@ export class AppComponent {
         if (this.job.download_started == true)
         {
           this.buffer_percent += 100/3
+          this.download_wheel = 50;
         }
         if (this.job.download_finished == true)
         {
           this.progress_percent += 100/3
+          this.download_wheel = 100;
         }
         if (this.job.bpm_started == true)
         {
           this.buffer_percent += 100/3
+          this.bpm_wheel = 50;
         }
         if (this.job.bpm_finished == true)
         {
           this.progress_percent += 100/3
+          this.bpm_wheel = 100;
         }
         if (this.job.encoding_started == true)
         {
           this.buffer_percent += 100/3
+          this.render_wheel = 50;
         }
         if (this.job.encoding_finished == true)
         {
           this.progress_percent += 100/3
+          this.render_wheel = 100;
         }
     })
     console.log(this.messageForm.controls.url.value);

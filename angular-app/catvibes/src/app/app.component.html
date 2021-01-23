@@ -27,17 +27,23 @@
         <mat-progress-bar mode='buffer' [value]="progress_percent" [bufferValue]="buffer_percent"></mat-progress-bar>
       </section>
       <section>
-        Download
-        <mat-spinner mode="determinate" value=75></mat-spinner>
-        BPM
-        <mat-spinner mode="determinate" value=75></mat-spinner>
-        Encoding
-        <mat-spinner mode="determinate" value=75></mat-spinner>
+        <mat-grid-list cols="3" rowHeight="100px">
+          
+          <mat-grid-tile>
+            Download
+            <mat-spinner mode="determinate" [value]="download_wheel"></mat-spinner>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            BPM
+            <mat-spinner mode="determinate" [value]="bpm_wheel"></mat-spinner>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            Rendering
+            <mat-spinner mode="determinate" [value]="render_wheel"></mat-spinner>
+          </mat-grid-tile>
+        </mat-grid-list>
       </section>
     </mat-card-content>
   </mat-card>
-
-  JOB
-  {{job.bpm_finished}}
 
 </body>

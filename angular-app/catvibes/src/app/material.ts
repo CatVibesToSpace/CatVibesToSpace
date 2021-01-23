@@ -8,10 +8,17 @@ import {MatInputModule} from '@angular/material/input'
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 @NgModule({
-    imports: [MatButtonModule, MatToolbarModule, MatIconModule, MatCardModule, MatFormFieldModule, MatInputModule, MatProgressBarModule, MatChipsModule, MatProgressSpinnerModule],
-    exports: [MatButtonModule, MatToolbarModule, MatIconModule, MatCardModule, MatFormFieldModule, MatInputModule, MatProgressBarModule, MatChipsModule, MatProgressSpinnerModule],
+    imports: [MatButtonModule, MatToolbarModule, MatIconModule, 
+        MatCardModule, MatFormFieldModule, MatInputModule, 
+        MatProgressBarModule, MatChipsModule, MatProgressSpinnerModule,
+        MatGridListModule],
+    exports: [MatButtonModule, MatToolbarModule, MatIconModule, 
+        MatCardModule, MatFormFieldModule, MatInputModule,
+        MatProgressBarModule, MatChipsModule, MatProgressSpinnerModule,
+        MatGridListModule],
 })
 
 export class MaterialModule { }
