@@ -9,4 +9,5 @@ export class Job {
     encoding_finished: boolean;
     encoding_started: boolean;
     url: string;
+    ready_to_start: boolean;
 }

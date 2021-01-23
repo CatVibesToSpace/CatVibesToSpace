@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { JobService } from 'src/app/job.service';
 import { Job } from './job.model';
+import { AngularFirestoreDocument } from '@angular/fire/firestore';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -20,10 +22,26 @@ export class AppComponent {
   submitted = false;
   success = false;
 
+  progress_percent = 0;
+  buffer_percent = 0;
+
+  jobWatcher: Observable<any>;
   constructor(private jobService: JobService, private formBuilder: FormBuilder) { 
     this.messageForm = this.formBuilder.group({
       url: ['', Validators.required]
     });
+
+    this.job = new Job();
+    this.job.id = this.getUniqueId(4);
+    this.job.bpm = -1;
+
+    this.job.bpm_finished = false;
+    this.job.bpm_started = false;
+    this.job.download_finished = false;
+    this.job.download_started = false;
+    this.job.encoding_finished = false;
+    this.job.encoding_started = false;
+    this.job.url = "";
   }
 
   /**
@@ -49,25 +67,57 @@ export class AppComponent {
     }
 
     // Add stuff to submit
-    this.job = new Job();
-    this.job.id = this.getUniqueId(4);
-    this.job.bpm = -1;
-
-    this.job.bpm_finished = false;
-    this.job.bpm_started = false;
-    this.job.download_finished = false;
-    this.job.download_started = false;
-    this.job.encoding_finished = false;
-    this.job.encoding_started = false;
-
+    
     this.job.youtube_url = this.messageForm.controls.url.value;
-    this.job.url = "";
+    
 
     this.success = true;
-    
-    this.jobService.createJob(this.job);
 
+    this.jobWatcher = this.jobService.createJob(this.job).valueChanges();
+
+    this.jobWatcher.subscribe(data => {
+        this.job.bpm = data.bpm;
+
+        this.job.bpm_finished = data.bpm_finished;
+        this.job.bpm_started = data.bpm_started;
+        this.job.download_finished = data.download_finished;
+        this.job.download_started = data.download_started;
+        this.job.encoding_finished = data.encoding_finished;
+        this.job.encoding_started = data.encoding_started;
+
+        this.job.youtube_url = this.messageForm.controls.url.value;
+        this.job.url = "";
+
+        this.progress_percent = 0
+        this.buffer_percent = 0
+
+        if (this.job.download_started == true)
+        {
+          this.buffer_percent += 100/3
+        }
+        if (this.job.download_finished == true)
+        {
+          this.progress_percent += 100/3
+        }
+        if (this.job.bpm_started == true)
+        {
+          this.buffer_percent += 100/3
+        }
+        if (this.job.bpm_finished == true)
+        {
+          this.progress_percent += 100/3
+        }
+        if (this.job.encoding_started == true)
+        {
+          this.buffer_percent += 100/3
+        }
+        if (this.job.encoding_finished == true)
+        {
+          this.progress_percent += 100/3
+        }
+    })
     console.log(this.messageForm.controls.url.value);
+
   }
 
   vibeClick() {

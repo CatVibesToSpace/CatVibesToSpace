@@ -15,8 +15,11 @@ export class JobService {
   
   createJob(job: Job){
 
+    this.firestore.collection('jobs').doc(job.id).set(JSON.parse(JSON.stringify(job)));
 
-    return this.firestore.collection('jobs').add(JSON.parse(JSON.stringify(job)));
+    return this.firestore.collection('jobs').doc(job.id)
+    //return this.firestore.collection('jobs').add(JSON.parse(JSON.stringify(job)));
   }
+
 
 }
