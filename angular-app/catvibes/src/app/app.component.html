@@ -1,0 +1,52 @@
+  
+<body class="mat-app-background">
+  <mat-toolbar>
+    <span>CAT VIBES TO _____</span>
+  </mat-toolbar>
+
+  <mat-card class="example-card">
+    <mat-card-content>
+        CAT VIBES TO 
+        <form [formGroup]="messageForm" (ngSubmit)="onSubmit()">
+          <mat-form-field appearance="outline">
+            <mat-label>Outline form field</mat-label>
+            <input matInput placeholder="youtube url" formControlName="url">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-hint>Hint</mat-hint>
+          </mat-form-field>
+
+          <button mat-raised-button color="primary">VIBE!</button>
+        </form>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="example-card" *ngIf="success"> 
+    <mat-card-content>
+      <span>
+        <h2 class="example-h2">Result</h2>
+        <a mat-raised-button color="primary" class="download-button" [href]="download_url" *ngIf="download_ready">Download!</a>
+      </span>
+      <p></p>
+      <section class="example-section">
+        <mat-progress-bar mode='buffer' [value]="progress_percent" [bufferValue]="buffer_percent"></mat-progress-bar>
+      </section>
+      <section>
+        <mat-grid-list cols="3" rowHeight="100px">
+          
+          <mat-grid-tile>
+            Download
+            <mat-spinner mode="determinate" [value]="download_wheel"></mat-spinner>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            BPM
+            <mat-spinner mode="determinate" [value]="bpm_wheel"></mat-spinner>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            Rendering
+            <mat-spinner mode="determinate" [value]="render_wheel"></mat-spinner>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </section>
+    </mat-card-content>
+  </mat-card>
+
+</body>
