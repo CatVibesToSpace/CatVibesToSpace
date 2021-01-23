@@ -1,12 +1,13 @@
 # Trigger on create for jobs/{create}
 # Entry point is download_video
 from __future__ import unicode_literals
-import youtube_dl
 import tempfile
+from aubio import source, tempo
+from numpy import median, diff
+from pydub import AudioSegment
 import os
 
 from google.cloud import firestore, storage
-import youtube_dl
 
 client = firestore.Client()
 
@@ -69,7 +70,7 @@ def get_bpm(event, context):
             u'bpm': bpm
         })
         os.remove(temp_local_filename)
-        
+
     print(str(event))
 
 def get_file_bpm(path, params=None):
@@ -123,8 +124,14 @@ def get_file_bpm(path, params=None):
         # if enough beats are found, convert to periods then to bpm
         if len(beats) > 1:
             if len(beats) < 4:
-            bpms = 60./diff(beats)
+                bpms = 60./diff(beats)
             return median(bpms)
         else:
             return 0
     return beats_to_bpm(beats, path)
+
+def generate_wav_bpm(filename):
+    print("GWB has been called with ", filename)
+    AudioSegment.from_file(filename).export("audio.wav", format="wav")
+    bpm = get_file_bpm('audio.wav')
+    return bpm
