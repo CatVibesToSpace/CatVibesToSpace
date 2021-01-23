@@ -63,7 +63,7 @@ def get_bpm(event, context):
         blob = storage_client.bucket(DOWNLOAD_BUCKET_NAME).get_blob(id+".mp4")
         blob.download_to_filename(temp_local_filename)
         # _, temp_local_filename = tempfile.mkstemp(suffix='.mp4')
-        bpm = get_file_bpm(temp_local_filename)
+        bpm = generate_wav_bpm(temp_local_filename)
 
         affected_doc.set({
             u'bpm_finished': True,
