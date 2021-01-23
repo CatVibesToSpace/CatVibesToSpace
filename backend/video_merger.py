@@ -27,7 +27,7 @@ def my_hook(d):
         audio = stream.audio
         video = ffmpeg.filter(video, 'scale', 1280,720) # Resize to 720p
         video = ffmpeg.overlay(stream, looping, shortest=1, y="140")
-        stream = ffmpeg.output(video, audio, 'test.mp4').overwrite_output()
+        stream = ffmpeg.output(video, audio, '../test.mp4').overwrite_output()
         stream.run()
 
 
