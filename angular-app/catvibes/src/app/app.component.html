@@ -6,20 +6,20 @@
 
   <mat-card class="example-card">
     <mat-card-content>
-      <p>
         CAT VIBES TO 
-        <mat-form-field appearance="outline">
-          <mat-label>Outline form field</mat-label>
-          <input matInput placeholder="youtube url">
-          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-          <mat-hint>Hint</mat-hint>
-        </mat-form-field>
+        <form [formGroup]="messageForm" (ngSubmit)="onSubmit()">
+          <mat-form-field appearance="outline">
+            <mat-label>Outline form field</mat-label>
+            <input matInput placeholder="youtube url" formControlName="url">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-hint>Hint</mat-hint>
+          </mat-form-field>
 
-        <button mat-raised-button color="primary">VIBE!</button>
-      </p>
+          <button mat-raised-button color="primary">VIBE!</button>
+        </form>
     </mat-card-content>
   </mat-card>
-  <mat-card class="example-card">
+  <mat-card class="example-card" *ngIf="success">
     <mat-card-content>
       <h2 class="example-h2">Result</h2>
 

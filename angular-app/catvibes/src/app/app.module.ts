@@ -6,6 +6,15 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import { MaterialModule } from './material'
 import { FormsModule } from '@angular/forms';
 
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { environment } from '../environments/environment';
+
+import { JobService } from 'src/app/job.service';
+import { Job } from 'src/app/job.model';
+
+import { ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -14,7 +23,10 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
-    FormsModule
+    FormsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireDatabaseModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
