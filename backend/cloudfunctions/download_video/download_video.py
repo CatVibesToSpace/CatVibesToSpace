@@ -39,7 +39,7 @@ def my_hook(d):
           os.remove(filename)
 
           global my_affected_doc
-          my_affected_doc.set({
+          my_affected_doc.update({
                u'download_finished': True
           })
 
@@ -83,7 +83,7 @@ def download_video(event, context):
           affected_doc = client.collection(collection_path).document(document_path)
 
           print(f'Replacing value: {download_started} --> True')
-          affected_doc.set({
+          affected_doc.update({
                u'download_started': True
           })
 
