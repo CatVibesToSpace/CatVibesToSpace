@@ -54,9 +54,11 @@ def get_file_bpm(path, params=None):
         if len(beats) > 1:
             if len(beats) < 4:
                 print("few beats found in {:s}".format(path))
-            bpms = 60./diff(beats)
+            bpms = 60. / diff(beats)
+            return median(bpms)
         else:
             return 0
+
     return beats_to_bpm(beats, path)
 
 def generate_wav_bpm(filename):
