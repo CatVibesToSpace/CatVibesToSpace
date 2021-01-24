@@ -53,8 +53,8 @@ def get_file_bpm(path, params=None):
         # if enough beats are found, convert to periods then to bpm
         if len(beats) > 1:
             if len(beats) < 4:
-                bpms = 60./diff(beats)
-            return median(bpms)
+                print("few beats found in {:s}".format(path))
+            bpms = 60./diff(beats)
         else:
             return 0
     return beats_to_bpm(beats, path)
