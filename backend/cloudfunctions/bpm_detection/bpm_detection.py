@@ -101,6 +101,7 @@ def get_file_bpm(path, params=None):
     if 'hop_s' in params:
         hop_s = params.hop_s
     s = source(path, samplerate, hop_s)
+    print("sourced wav at: " + path)
     samplerate = s.samplerate
     o = tempo("specdiff", win_s, hop_s, samplerate)
     # List of beats, in samples
@@ -133,7 +134,10 @@ def get_file_bpm(path, params=None):
 def generate_wav_bpm(filename, id):
     print("GWB has been called with ", filename)
     audio_filename = "/tmp/"+id+".wav"
+
+    print("audio filename: " + audio_filename)
     AudioSegment.from_file(filename).export(audio_filename, format="wav")
     bpm = get_file_bpm(audio_filename)
+    print("bpm is: " + str(bpm))
     os.remove(audio_filename)
     return bpm
