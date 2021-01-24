@@ -25,7 +25,7 @@
         
     </mat-card-content>
   </mat-card>
-  <mat-card class="example-card" *ngIf="true or success"> 
+  <mat-card class="example-card" *ngIf="success"> 
     <mat-card-content>
       <span>
         <h2 class="example-h2">Our cats have started to work - please be patient 🐈</h2>
@@ -36,19 +36,19 @@
         <mat-progress-bar mode='buffer' [value]="progress_percent" [bufferValue]="buffer_percent"></mat-progress-bar>
       </section>
       <section>
-        <mat-grid-list cols="3" rowHeight="100px">
+        <mat-grid-list cols="3" rowHeight="125px">
           
           <mat-grid-tile>
-            Download
-            <mat-spinner mode="determinate" [value]="download_wheel"></mat-spinner>
+            <div class="spinner-message"><b>download</b></div>
+            <mat-spinner mode="determinate" [value]="download_wheel" diameter=125></mat-spinner>
           </mat-grid-tile>
           <mat-grid-tile>
-            BPM
-            <mat-spinner mode="determinate" [value]="bpm_wheel"></mat-spinner>
+            <div class="spinner-message"><b>bpm analysis</b></div>
+            <mat-spinner mode="determinate" [value]="bpm_wheel" diameter=125></mat-spinner>
           </mat-grid-tile>
           <mat-grid-tile>
-            Rendering
-            <mat-spinner mode="determinate" [value]="render_wheel"></mat-spinner>
+            <div class="spinner-message"><b>render</b></div>
+            <mat-spinner mode="determinate" [value]="render_wheel" diameter=125></mat-spinner>
           </mat-grid-tile>
         </mat-grid-list>
       </section>
