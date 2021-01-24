@@ -6,6 +6,7 @@ import { AngularFirestoreDocument } from '@angular/fire/firestore';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { NONE_TYPE } from '@angular/compiler';
 
 
 declare let particlesJS: any; // Required to be properly interpreted by TypeScript
@@ -18,12 +19,17 @@ declare let particlesJS: any; // Required to be properly interpreted by TypeScri
 
 
 export class AppComponent implements OnInit {
+
+
   title = 'catvibes';
   job: Job;
 
   messageForm: FormGroup;
   submitted = false;
   success = false;
+
+  image_src = NONE_TYPE
+  image_type = NONE_TYPE;
 
   progress_percent = 0;
   buffer_percent = 0;
