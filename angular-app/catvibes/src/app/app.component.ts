@@ -21,7 +21,7 @@ declare let particlesJS: any; // Required to be properly interpreted by TypeScri
 export class AppComponent implements OnInit {
 
 
-  title = 'catvibes';
+  title = 'cat vibes to ______';
   job: Job;
 
   breakpoint = 3
