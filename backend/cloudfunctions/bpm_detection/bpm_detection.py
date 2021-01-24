@@ -37,10 +37,10 @@ def get_bpm(event, context):
     print(f"Function triggered by change to: {resource_string}.")
     # now print out the entire event object
     bpm_started = event['value']['fields']['bpm_started']['booleanValue']
-
+    download_finished = event['value']['fields']['download_finished']['booleanValue']
     print(type(bpm_started))
     print(bpm_started)
-    if not bpm_started:
+    if (not bpm_started) and download_finished:
         # Do the download
 
         print("starting download")
@@ -51,7 +51,7 @@ def get_bpm(event, context):
         affected_doc = client.collection(collection_path).document(document_path)
 
         print(f'Replacing value: {bpm_started} --> True')
-        affected_doc.set({
+        affected_doc.update({
             u'bpm_started': True
         })
 
@@ -65,7 +65,7 @@ def get_bpm(event, context):
         # _, temp_local_filename = tempfile.mkstemp(suffix='.mp4')
         bpm = generate_wav_bpm(temp_local_filename)
 
-        affected_doc.set({
+        affected_doc.update({
             u'bpm_finished': True,
             u'bpm': bpm
         })
