@@ -6,6 +6,8 @@ import os
 
 from google.cloud import firestore, storage
 
+import subprocess
+
 import ffmpeg
 
 client = firestore.Client()
@@ -68,7 +70,24 @@ def render_video(event, context):
         looping = ffmpeg.input(temp_local_cat_filename)#, stream_loop = -1) # Import tom as a looping stream, tom is 426x240
         looping = ffmpeg.filter(looping, "colorkey", color="0x52f21f", similarity=0.5, blend=0.1) # This green I got myself from the tom video
         looping = ffmpeg.filter(looping, "loop", loop=10)
-        stream = ffmpeg.input(temp_local_input_filename, ss=90, t=25) # Get start at 20s in and make the clip 20s
+        def get_length(filename):
+            result = subprocess.run(["ffprobe", "-v", "error", "-show_entries",
+                                     "format=duration", "-of",
+                                     "default=noprint_wrappers=1:nokey=1", filename],
+                                    stdout=subprocess.PIPE,
+                                    stderr=subprocess.STDOUT)
+            return float(result.stdout)
+        duration = get_length(temp_local_input_filename)
+        if duration <50 and duration > 30:
+            start = duration-30
+            length = 25
+        elif duration < 30:
+            start = 2
+            length = duration - 4
+        else:
+            start = (duration/2)-15
+            length = 30
+        stream = ffmpeg.input(temp_local_input_filename, ss=start, t=length) # Get start at 20s in and make the clip 20s
         video = stream.video
         audio = stream.audio
 

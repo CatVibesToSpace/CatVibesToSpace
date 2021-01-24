@@ -21,10 +21,28 @@ def my_hook(d):
 
         # ffmpeg -stream_loop -1 -i bg.mp4 -i main.mp4 -filter_complex "[0][1]overlay=shortest=1[v]" -map "[v]" -map 1:a -c:a copy output.mp4
 
-        looping = ffmpeg.input("cat_360.mp4",stream_loop = -1,) # Import tom as a looping stream, tom is 426x240
+        looping = ffmpeg.input("cat.mp4",stream_loop = -1,) # Import tom as a looping stream, tom is 426x240
         looping = ffmpeg.filter(looping, "colorkey", color="0x2bd71c", similarity=0.5, blend=0.1) # This green I got myself from the tom video
+        import subprocess
 
-        stream = ffmpeg.input(filename, ss=90, t=25) # Get start at 20s in and make the clip 20s
+        def get_length(filename):
+            result = subprocess.run(["ffprobe", "-v", "error", "-show_entries",
+                                     "format=duration", "-of",
+                                     "default=noprint_wrappers=1:nokey=1", filename],
+                                    stdout=subprocess.PIPE,
+                                    stderr=subprocess.STDOUT)
+            return float(result.stdout)
+        duration = get_length(filename)
+        if duration <50 and duration > 30:
+            start = duration-30
+            length = 25
+        elif duration < 30:
+            start = 2
+            length = duration - 4
+        else:
+            start = (duration/2)-15
+            length = 30
+        stream = ffmpeg.input(filename, ss=start, t=length) # Get start at 20s in and make the clip 20s
         video = stream.video
         audio = stream.audio
         print("Generating waveform!!!")
