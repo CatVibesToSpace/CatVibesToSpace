@@ -130,8 +130,10 @@ def get_file_bpm(path, params=None):
             return 0
     return beats_to_bpm(beats, path)
 
-def generate_wav_bpm(filename):
+def generate_wav_bpm(filename, id):
     print("GWB has been called with ", filename)
-    AudioSegment.from_file(filename).export("audio.wav", format="wav")
-    bpm = get_file_bpm('audio.wav')
+    audio_filename = "/tmp/"+id+".wav"
+    AudioSegment.from_file(filename).export(audio_filename, format="wav")
+    bpm = get_file_bpm(audio_filename)
+    os.remove(audio_filename)
     return bpm
