@@ -6,24 +6,30 @@
 
   <mat-card class="example-card">
     <mat-card-content>
-        CAT VIBES TO 
-        <form [formGroup]="messageForm" (ngSubmit)="onSubmit()">
-          <mat-form-field appearance="outline">
-            <mat-label>Outline form field</mat-label>
-            <input matInput placeholder="youtube url" formControlName="url">
-            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-            <mat-hint>Hint</mat-hint>
-          </mat-form-field>
-
-          <button mat-raised-button color="primary">VIBE!</button>
-        </form>
+      
+      <form [formGroup]="messageForm" (ngSubmit)="onSubmit()" style="width: 100%">
+        <div class="flex-container" fxLayout="row" style="align-items: center">
+          <div class="child-1" fxFlex="0 0 auto"><h2 class="example-h2" >CAT VIBES TO </h2></div>
+          
+          <div class="child-2" fxFlex="2 1 auto" style="text-align: center"><mat-form-field style="width: 100%" appearance="outline">
+            <mat-label style="width: 100%" style="text-align: center">enter youtube url!</mat-label>
+            <input style="width: 100%" matInput placeholder="youtube url" formControlName="url" style="text-align: center">
+            </mat-form-field>
+          </div>
+          
+          <div class="child-3" fxFlex="0 0 auto">
+            <button mat-raised-button color="primary">VIBE!</button>
+          </div>
+        </div>
+      </form>
+        
     </mat-card-content>
   </mat-card>
-  <mat-card class="example-card" *ngIf="success"> 
+  <mat-card class="example-card" *ngIf="true or success"> 
     <mat-card-content>
       <span>
-        <h2 class="example-h2">Result</h2>
-        <a mat-raised-button color="primary" class="download-button" [href]="download_url" *ngIf="download_ready">Download!</a>
+        <h2 class="example-h2">Our cats have started to work - please be patient 🐈</h2>
+        <a mat-raised-button color="primary" [disabled]="!download_ready" class="download-button" [href]="download_url">Download!</a>
       </span>
       <p></p>
       <section class="example-section">
