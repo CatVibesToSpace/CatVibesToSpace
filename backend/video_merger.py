@@ -21,8 +21,8 @@ def my_hook(d):
 
         # ffmpeg -stream_loop -1 -i bg.mp4 -i main.mp4 -filter_complex "[0][1]overlay=shortest=1[v]" -map "[v]" -map 1:a -c:a copy output.mp4
 
-        looping = ffmpeg.input("cat.mp4", stream_loop = -1) # Import tom as a looping stream, tom is 426x240
-        looping = ffmpeg.filter(looping, "colorkey", color="0x2bd71c", similarity=0.3, blend=0) # This green I got myself from the tom video
+        looping = ffmpeg.input("cat_360.mp4",stream_loop = -1,) # Import tom as a looping stream, tom is 426x240
+        looping = ffmpeg.filter(looping, "colorkey", color="0x2bd71c", similarity=0.5, blend=0.1) # This green I got myself from the tom video
 
         stream = ffmpeg.input(filename, ss=90, t=25) # Get start at 20s in and make the clip 20s
         video = stream.video

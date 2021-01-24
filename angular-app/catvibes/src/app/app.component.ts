@@ -1,10 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
+import { ParticlesConfig } from './particles-config';
 import { JobService } from 'src/app/job.service';
 import { Job } from './job.model';
 import { AngularFirestoreDocument } from '@angular/fire/firestore';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { NONE_TYPE } from '@angular/compiler';
+
+
+declare let particlesJS: any; // Required to be properly interpreted by TypeScript
 
 @Component({
   selector: 'app-root',
@@ -13,14 +18,20 @@ import { Observable } from 'rxjs';
 })
 
 
+export class AppComponent implements OnInit {
 
-export class AppComponent {
-  title = 'catvibes';
+
+  title = 'cat vibes to ______';
   job: Job;
+
+  breakpoint = 3
 
   messageForm: FormGroup;
   submitted = false;
   success = false;
+
+  image_src = NONE_TYPE
+  image_type = NONE_TYPE;
 
   progress_percent = 0;
   buffer_percent = 0;
@@ -140,5 +151,20 @@ export class AppComponent {
 
   vibeClick() {
     console.log('clicked');
+  }
+
+  public ngOnInit(): void {
+    this.invokeParticles();
+    this.breakpoint = (window.innerWidth <= 700) ? 1 : 3;
+  
+  
+  }
+  onResize(event) {
+    this.breakpoint = (event.target.innerWidth <= 700) ? 1 : 3;
+    console.log(event.target.innerWidth)
+  }
+
+  public invokeParticles(): void {
+    particlesJS('particles-js', ParticlesConfig, function() {});
   }
 }

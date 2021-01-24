@@ -1,3 +1,11 @@
+#particles-js {
+  height: 100vh;
+  position: fixed;
+  z-index: 0;
+  top: 0;
+  left: 0
+}
+
 .example-spacer {
     flex: 1 1 auto;
   }
@@ -9,7 +17,7 @@ display: inline;
 }
 
 .example-card {
-    margin: 100px
+  margin: 60px;
 }
 
 .example-section {
@@ -25,4 +33,23 @@ margin: 10 10px;
 
 .download-button{
 float: right;
+}
+
+.flex-container {
+  display: flex;
+}
+
+::ng-deep .mat-form-field-wrapper{
+  margin-bottom: -1.25em;
+  padding-bottom: 0em;
+  padding-left: 2em;
+  padding-right: 2em;
+}
+
+.spinner-message {
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
