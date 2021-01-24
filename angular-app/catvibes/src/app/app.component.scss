@@ -6,7 +6,6 @@
   left: 0
 }
 
-
 .example-spacer {
     flex: 1 1 auto;
   }
@@ -18,7 +17,7 @@ display: inline;
 }
 
 .example-card {
-    margin: 100px
+  margin: 60px;
 }
 
 .example-section {
@@ -39,11 +38,6 @@ float: right;
 .flex-container {
   display: flex;
 }
-
-.animated-background {
-
-}
-
 
 ::ng-deep .mat-form-field-wrapper{
   margin-bottom: -1.25em;

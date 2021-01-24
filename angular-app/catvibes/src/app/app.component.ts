@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import { ParticlesConfig } from './particles-config';
 import { JobService } from 'src/app/job.service';
 import { Job } from './job.model';
@@ -23,6 +23,8 @@ export class AppComponent implements OnInit {
 
   title = 'catvibes';
   job: Job;
+
+  breakpoint = 3
 
   messageForm: FormGroup;
   submitted = false;
@@ -153,6 +155,13 @@ export class AppComponent implements OnInit {
 
   public ngOnInit(): void {
     this.invokeParticles();
+    this.breakpoint = (window.innerWidth <= 700) ? 1 : 3;
+  
+  
+  }
+  onResize(event) {
+    this.breakpoint = (event.target.innerWidth <= 700) ? 1 : 3;
+    console.log(event.target.innerWidth)
   }
 
   public invokeParticles(): void {

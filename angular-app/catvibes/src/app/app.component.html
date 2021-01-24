@@ -1,15 +1,15 @@
 <div id="particles-js"></div>
 <body class="mat-app-background">
   <mat-toolbar>
-    <span>CAT VIBES TO _____</span>
+    <span>CAT VIBES TO __________________</span>
   </mat-toolbar>
 
   <mat-card class="example-card">
     <mat-card-content>
       
       <form [formGroup]="messageForm" (ngSubmit)="onSubmit()" style="width: 100%">
-        <div class="flex-container" fxLayout="row" style="align-items: center">
-          <div class="child-1" fxFlex="0 0 auto"><h2 class="example-h2" >CAT VIBES TO </h2></div>
+        <div class="flex-container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" style="align-items: center">
+          <div class="child-1" fxFlex="0 1 auto"><h2 class="example-h2" >CAT VIBES TO </h2></div>
           
           <div class="child-2" fxFlex="2 1 auto" style="text-align: center"><mat-form-field style="width: 100%" appearance="outline">
             <mat-label style="width: 100%" style="text-align: center">enter youtube url!</mat-label>
@@ -17,7 +17,7 @@
             </mat-form-field>
           </div>
           
-          <div class="child-3" fxFlex="0 0 auto">
+          <div class="child-3" fxFlex="0 1 auto">
             <button mat-raised-button color="primary">VIBE!</button>
           </div>
         </div>
@@ -25,33 +25,45 @@
         
     </mat-card-content>
   </mat-card>
-  <mat-card class="example-card" *ngIf="success"> 
+  <mat-card class="example-card" *ngIf="true or success"> 
     <mat-card-content>
-      <span>
-        <h2 class="example-h2">Our cats have started to work - please be patient 🐈</h2>
-        <a mat-raised-button color="primary" [disabled]="!download_ready" class="download-button" [href]="download_url">Download!</a>
-      </span>
-      <p></p>
-      <section class="example-section">
-        <mat-progress-bar mode='buffer' [value]="progress_percent" [bufferValue]="buffer_percent"></mat-progress-bar>
-      </section>
-      <section>
-        <mat-grid-list cols="3" rowHeight="125px">
-          
-          <mat-grid-tile>
-            <div class="spinner-message"><b>download</b></div>
-            <mat-spinner mode="determinate" [value]="download_wheel" diameter=125></mat-spinner>
-          </mat-grid-tile>
-          <mat-grid-tile>
-            <div class="spinner-message"><b>bpm analysis</b></div>
-            <mat-spinner mode="determinate" [value]="bpm_wheel" diameter=125></mat-spinner>
-          </mat-grid-tile>
-          <mat-grid-tile>
-            <div class="spinner-message"><b>render</b></div>
-            <mat-spinner mode="determinate" [value]="render_wheel" diameter=125></mat-spinner>
-          </mat-grid-tile>
-        </mat-grid-list>
-      </section>
+      <div class="flex-container" fxLayout="column" fxLayout.xs="column" fxLayoutGap="0.5%" style="align-items: center, width=100%">
+        
+        <div class="child-1" fxFlex="0 1 auto" style="text-align: center">
+          <div class="flex-container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" style="align-items: center">
+
+              <div class="child-1" fxFlex="2 1 auto" style="text-align: center"><h2 class="example-h2">Our cats have started to work - please be patient 🐈</h2></div>
+              <div class="child-2" fxFlex="0 1 auto" style="text-align: center"><a mat-raised-button color="primary" [disabled]="!download_ready" class="download-button" [href]="download_url">Download!</a></div>
+          </div>
+        </div>
+
+
+        <div class="child-2" fxFlex="1 1 auto" style="text-align: center">
+          <section class="example-section" style="width: 100%">
+            <mat-progress-bar mode='buffer' [value]="progress_percent" [bufferValue]="buffer_percent"></mat-progress-bar>
+          </section>
+        </div>
+
+        <div class="child-3" fxFlex="1 1 auto" style="text-align: center">
+          <section>
+            <mat-grid-list cols="3" rowHeight="125px" [cols]="breakpoint" (window:resize)="onResize($event)">
+              
+              <mat-grid-tile>
+                <div class="spinner-message"><b>download</b></div>
+                <mat-spinner mode="determinate" [value]="download_wheel" diameter=125></mat-spinner>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <div class="spinner-message"><b>bpm analysis</b></div>
+                <mat-spinner mode="determinate" [value]="bpm_wheel" diameter=125></mat-spinner>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <div class="spinner-message"><b>render</b></div>
+                <mat-spinner mode="determinate" [value]="render_wheel" diameter=125></mat-spinner>
+              </mat-grid-tile>
+            </mat-grid-list>
+          </section>
+        </div>
+      </div>
     </mat-card-content>
   </mat-card>
 
