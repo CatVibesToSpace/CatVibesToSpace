@@ -1,10 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ParticlesConfig } from './particles-config';
 import { JobService } from 'src/app/job.service';
 import { Job } from './job.model';
 import { AngularFirestoreDocument } from '@angular/fire/firestore';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
+
+
+declare let particlesJS: any; // Required to be properly interpreted by TypeScript
 
 @Component({
   selector: 'app-root',
@@ -13,8 +17,7 @@ import { Observable } from 'rxjs';
 })
 
 
-
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'catvibes';
   job: Job;
 
@@ -140,5 +143,13 @@ export class AppComponent {
 
   vibeClick() {
     console.log('clicked');
+  }
+
+  public ngOnInit(): void {
+    this.invokeParticles();
+  }
+
+  public invokeParticles(): void {
+    particlesJS('particles-js', ParticlesConfig, function() {});
   }
 }
