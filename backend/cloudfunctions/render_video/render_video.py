@@ -65,9 +65,9 @@ def render_video(event, context):
         
         
         
-        looping = ffmpeg.input(temp_local_cat_filename, stream_loop = -1) # Import tom as a looping stream, tom is 426x240
-        looping = ffmpeg.filter(looping, "colorkey", color="0x2bd71c", similarity=0.3, blend=0) # This green I got myself from the tom video
-
+        looping = ffmpeg.input(temp_local_cat_filename)#, stream_loop = -1) # Import tom as a looping stream, tom is 426x240
+        looping = ffmpeg.filter(looping, "colorkey", color="0x52f21f", similarity=0.3, blend=0) # This green I got myself from the tom video
+        looping = ffmpeg.filter(looping, "loop", loop=10)
         stream = ffmpeg.input(temp_local_input_filename, ss=90, t=25) # Get start at 20s in and make the clip 20s
         video = stream.video
         audio = stream.audio
