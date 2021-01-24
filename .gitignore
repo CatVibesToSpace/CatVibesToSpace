@@ -64,3 +64,9 @@ node_modules/
 
 # dotenv environment variables file
 .env
+
+.mp4
+.wav
+backend/*.wav
+backend/*.mp4
+test.mp4
