@@ -1,9 +1,12 @@
-<div id="particles-js"></div>
-<body class="mat-app-background">
+<div id="particles-js" style="width: 100%"></div>
+<body class="mat-app-background" (window:resize)="onResize($event)">
   <mat-toolbar>
-    <span class="example-spacer">CAT VIBES TO __________________</span><em>enter a song's youtube url and recieve a perfectly synced vibing cat</em>
+    
+    <mat-toolbar-row>
+      CAT VIBES TO __________________ <span class="example-spacer"></span><div  *ngIf="breakpoint2">enter a song's youtube url and recieve a perfectly synced vibing cat</div>
+    </mat-toolbar-row> 
+  
   </mat-toolbar>
-
   <mat-card class="example-card">
     <mat-card-content>
       
@@ -39,14 +42,14 @@
 
 
         <div class="child-2" fxFlex="1 1 auto" style="text-align: center">
-          <section class="example-section" style="width: 100%">
+          <section class="example-section" style="width: 100%;">
             <mat-progress-bar mode='buffer' [value]="progress_percent" [bufferValue]="buffer_percent"></mat-progress-bar>
           </section>
         </div>
 
         <div class="child-3" fxFlex="1 1 auto" style="text-align: center">
           <section>
-            <mat-grid-list cols="3" rowHeight="125px" [cols]="breakpoint" (window:resize)="onResize($event)">
+            <mat-grid-list cols="3" rowHeight="125px" [cols]="breakpoint" (window:resize)="onResize($event)" gutterSize="25">
               
               <mat-grid-tile>
                 <div class="spinner-message"><b>download</b></div>
@@ -66,5 +69,7 @@
       </div>
     </mat-card-content>
   </mat-card>
-
+  <mat-toolbar style="position: fixed; bottom: 0;">
+    <span class="example-spacer">Made with 🙀 by <a href="https://github.com/HarryClipston">Harry</a> and <a href="https://github.com/harry48225">Harry</a></span>
+  </mat-toolbar>
 </body>

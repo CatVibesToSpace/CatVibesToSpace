@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
   job: Job;
 
   breakpoint = 3
-
+  breakpoint2 = true
   messageForm: FormGroup;
   submitted = false;
   success = false;
@@ -155,12 +155,16 @@ export class AppComponent implements OnInit {
 
   public ngOnInit(): void {
     this.invokeParticles();
-    this.breakpoint = (window.innerWidth <= 700) ? 1 : 3;
+    this.breakpoint = (window.innerWidth <= 800) ? 1 : 3;
+
+    this.breakpoint2 = (window.innerWidth <= 1000) ? false : true;
   
   
   }
   onResize(event) {
-    this.breakpoint = (event.target.innerWidth <= 700) ? 1 : 3;
+    this.breakpoint = (event.target.innerWidth <= 800) ? 1 : 3;
+
+    this.breakpoint2 = (event.target.innerWidth <= 1000) ? false : true;
     console.log(event.target.innerWidth)
   }
 
